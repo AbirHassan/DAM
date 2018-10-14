@@ -5,5 +5,5 @@ Senior Design Project: Design-A-Map. Software to be used for helping with Urban 
 - run `python DAM.py`
 
 ## dependencies
-- python 3.5 <
+- requires python 3.5+
 - pip install flexx
