@@ -1,0 +1,19 @@
+#interface {
+	border-radius: 20px;
+}
+
+* {
+	font-family: 'Lato', sans-serif;
+}
+
+#nav-bar {
+	height: 100px;
+	margin-top:0px;
+	display:block;
+	position:absolute;
+}
+
+#close-btn {
+	display:block;
+	float:right;
+}

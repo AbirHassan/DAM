@@ -1,0 +1,26 @@
+{
+  "name": "dam",
+  "version": "1.0.0",
+  "description": "design a map",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbirHassan/DAM.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbirHassan/DAM/issues"
+  },
+  "homepage": "https://github.com/AbirHassan/DAM#readme",
+  "devDependencies": {
+    "electron": "^3.0.4"
+  },
+  "dependencies": {
+    "semantic-ui": "^2.4.1"
+  }
+}
