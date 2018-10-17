@@ -19,5 +19,8 @@
   "homepage": "https://github.com/AbirHassan/DAM#readme",
   "devDependencies": {
     "electron": "^3.0.4"
+  },
+  "dependencies": {
+    "mysql": "^2.16.0"
   }
 }
