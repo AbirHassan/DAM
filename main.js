@@ -1,16 +1,17 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-
 const path = require('path');
 const url = require('url');
 
-let mainWindow;
+const express = require("express");
+const app = express();
 
+const publicPath = path.resolve(__dirname, "public");
+
+app.use(express.static(publicPath));
+app.set('view engine', 'hbs');
 
 var mysql = require('mysql');
 
-// Add the credentials to access your database
+/*
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -44,37 +45,10 @@ connection.query($query, function(err, rows, fields) {
 connection.end(function(){
     // The connection has been closed
 });
+*/
 
 
-function createWindow () {
-  mainWindow = new BrowserWindow({
-  	width: 1024, height: 768, minHeight: 300, minWidth: 400, frame: false, titleBarStyle: 'hidden'
-  });
 
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'login.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
-  
-  mainWindow.setMenu(null);
-  mainWindow.webContents.openDevTools();
-
-  mainWindow.on('closed', function () {
-    mainWindow = null;
-  });
-}
-
-app.on('ready', createWindow);
-
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', function () {
-  if (mainWindow === null) {
-    createWindow();
-  }
+app.listen(3000, function() {
+  console.log("listening on port ", 3000);
 });
