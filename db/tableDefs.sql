@@ -93,8 +93,3 @@ CONSTRAINT `FK_28` FOREIGN KEY `fkIdx_28` (`CanvasName`, `UCID`, `Username`, `UU
 KEY `fkIdx_38` (`ItemName`, `Material`, `Width`, `Length`),
 CONSTRAINT `FK_38` FOREIGN KEY `fkIdx_38` (`ItemName`, `Material`, `Width`, `Length`) REFERENCES `Items` (`ItemName`, `Material`, `Width`, `Length`)
 );
-
-
-
-
-
