@@ -9,9 +9,6 @@ const publicPath = path.resolve(__dirname, "public");
 app.use(express.static(publicPath));
 app.set('view engine', 'hbs');
 
-
-<<<<<<< HEAD
-=======
 /*
 var connection = mysql.createConnection({
     host     : 'localhost',
@@ -47,7 +44,6 @@ connection.end(function(){
     // The connection has been closed
 });
 */
->>>>>>> e624dd212e20de49d7490c37256748b37cc330f0
 
 app.get('/', function(req, res) {
   res.render('index');
