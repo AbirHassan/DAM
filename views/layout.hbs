@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="/css/site.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+	<header>
+		<a href="/"> home</a>
+		 | 
+		{{#if user}}
+			<a href="/canvas/add"> Create a Canvas</a>
+			<object align="right"><a href="/logout">Logout</a></object>
+			<object align="right">Logged in as: {{user.username}} |</object>
+		{{else}}
+			<a href="/login"> Login</a> <a href="/register"> Register</a>
+		{{/if}} 
+	</header>
+	{{{body}}}
+</body>
+</html>
