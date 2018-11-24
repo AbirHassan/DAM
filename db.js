@@ -1,12 +1,12 @@
-// 1ST DRAFT DATA MODEL
+//Data Model
 const mongoose = require('mongoose');
-// my schema goes here!
+// schemas goes here
 // define the data in our collection
 
 // users
 // * our site requires authentication...
 // * so users have a username and password
-// * they also can have 0 or more restuarants in their profile
+// * they also can have 0 or more canvases in their profile
 const User = new mongoose.Schema({
     username: String,
     password: String,
@@ -30,7 +30,7 @@ const Canvas = new mongoose.Schema({
       length: Number,
       Xpos: Number,
       Ypos: Number 
-      //type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem'
+      //type: mongoose.Schema.Types.ObjectId, ref: 'CanvasItem'
     }]
 });
 mongoose.model("Canvas", Canvas);
