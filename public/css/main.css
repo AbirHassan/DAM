@@ -17,3 +17,7 @@
 	display:block;
 	float:right;
 }
+
+.furniture, .metrics {
+	margin: 1em;
+}
