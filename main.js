@@ -32,45 +32,31 @@ app.use((req, res, next)=> {
     next();
 });
 
-/*
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : null, // or the original password : 'apaswword'
-    database : 'dam'
-});
-
-// connect to mysql
-connection.connect(function(err) {
-    // in case of error
-    if(err){
-        console.log(err.code);
-        console.log(err.fatal);
-    }
-});
-
-// Perform a query
-$query = "SELECT * FROM `user` WHERE Username='AA'";
-
-connection.query($query, function(err, rows, fields) {
-    if(err){
-        console.log("An error ocurred performing the query.");
-        console.log(err);
-        return;
-    }
-
-    console.log("Query succesfully executed", rows);
-});
-
-// Close the connection
-connection.end(function(){
-    // The connection has been closed
-});
-*/
-
 app.get('/', function(req, res) {
-  res.render('index');
-})
+    if(!req.session.user.username) {
+        res.redirect('/login');
+    } else {
+        res.render('index');
+    }
+});
+
+app.get('/canvas/add', (req, res) => {
+    if(!req.session.user.username) {
+        res.redirect('/login');
+    } else {
+        res.render('canvas-add');
+    }
+});
+
+app.post('/canvas/add', (req, res) => {
+    if(!req.session.user.username) {
+        res.redirect('/login');
+    } else {
+        
+
+        res.redirect('/');
+    }
+});
 
 app.get('/register', (req, res) => {
     res.render('register');
