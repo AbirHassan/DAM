@@ -3,10 +3,12 @@ Senior Design Project: Design-A-Map. Software to be used for helping with Urban 
 
 ## notes
 dictionary of types:
+```javascript
 { roads: [road1.png, road2.png],
 	background_tiles: [background_tiles1.png, background_tiles2.png],
 	buildings: [...]
 }
+```
 
 to "save" a canvas:
 * click a save button
