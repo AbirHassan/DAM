@@ -17,10 +17,7 @@ to "save" a canvas:
 	- also get the current name of the canvas
 	- then will make a db query by username & current name of the canvas
 	- replace the entry with the current serialized form
-
-to "create" a canvas:
-* click create button
-
+	
 to "reupload" a canvas:
 * click on user profile which will have thumbnails of all the canvas by the user
 * click on a canvas,
@@ -28,7 +25,7 @@ to "reupload" a canvas:
 	- in the req object, will also pass in the serialized form
 * homepage will:
 	- load the serialized form from the req object if `edit` param is set to true
-	- not load anything if the `edit` param is set to false or not set at all
+	- not load anything if the `edit` param is set to false or not set at all (this will be "creating" a canvas)
 
 
 ## to start
