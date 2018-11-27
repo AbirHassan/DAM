@@ -27,6 +27,9 @@ Senior Design Project: Design-A-Map. Software to be used for helping with Urban 
 	- load the serialized form from the req object if `edit` param is set to true
 	- not load anything if the `edit` param is set to false or not set at all (this will be "creating" a canvas)
 
+### deserializing / serializing canvas
+https://stackoverflow.com/questions/32140156/serialize-and-deserialize-canvas-with-image-objects-fabricjs
+http://fabricjs.com/fabric-intro-part-3
 
 ## to start
 - if you're running the application for the first time, run `npm install` to download all the necessary node modules
