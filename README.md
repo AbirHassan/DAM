@@ -26,7 +26,9 @@ to "reupload" a canvas:
 * click on a canvas,
 	- will redirect to the homepage but pass in a parameter (edit=true mb)
 	- in the req object, will also pass in the serialized form
-* homepage will 
+* homepage will:
+	- load the serialized form from the req object if `edit` param is set to true
+	- not load anything if the `edit` param is set to false or not set at all
 
 
 ## to start
