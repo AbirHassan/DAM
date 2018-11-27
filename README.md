@@ -2,7 +2,7 @@
 Senior Design Project: Design-A-Map. Software to be used for helping with Urban Planning and creating maps to be used in games and other creative mediums.
 
 ## notes
-dictionary of types:
+### dictionary of types:
 ```javascript
 { roads: [road1.png, road2.png],
 	background_tiles: [background_tiles1.png, background_tiles2.png],
@@ -10,7 +10,7 @@ dictionary of types:
 }
 ```
 
-to "save" a canvas:
+### to "save" a canvas:
 * click a save button
 * save button will:
 	- generate a serialized form of the canvas
@@ -18,7 +18,7 @@ to "save" a canvas:
 	- then will make a db query by username & current name of the canvas
 	- replace the entry with the current serialized form
 	
-to "reupload" a canvas:
+### to "reupload" a canvas:
 * click on user profile which will have thumbnails of all the canvas by the user
 * click on a canvas,
 	- will redirect to the homepage but pass in a parameter (edit=true mb)
