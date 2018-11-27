@@ -1,1 +1,187 @@
-hello world
+<div class="fullpage">
+	<div class="canvas-container" data-floorplan="http://familygardentrains.com/resource/brick_n_stone/stacked_stone_med.jpg">
+      	<canvas></canvas>
+    </div>
+	<div class="section" style="height:40%">		    	
+    	<div class="side">
+    		<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="assets-tab" data-toggle="tab" href="#assets" role="tab" aria-controls="assets" aria-selected="true">Assets</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Metrics</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="assets" role="tabpanel" aria-labelledby="assets-tab">
+					<div class="furniture">
+						<div class="dropdown">
+							Choose type of asset: 
+							<button class="btn dropdown-toggle" type="button" id="assetChoice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							asset type
+							</button>
+							<div class="dropdown-menu" aria-labelledby="assetChoice">
+								<a class="dropdown-item" href="#roads">roads</a>
+								<a class="dropdown-item" href="#background">background tiles</a>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							{{#each type}}
+								{{if type != 'Background'}}
+									<div id={{type}}>
+										{{#each type.assets}}
+											<img draggable="true" src="Assets/{{this}}">
+										{{/each}}
+									</div>
+								{{else}}
+									<div id={{type}}>
+										<img src="Assets/{{this}}">
+									</div>
+								{{/if}}
+						    {{/each}}
+
+							<div id="roads">
+						    	<img draggable="true" src="Assets/road1.png">
+						      	<img draggable="true" src="Assets/road2.png">
+						      	<img draggable="true" src="Assets/road3.png">
+						      	<img draggable="true" src="Assets/road3.png">
+						      	<img draggable="true" src="Assets/road3.png">
+						      	<img draggable="true" src="Assets/road3.png">
+					      		<img draggable="true" src="Assets/road3.png">
+					      		<img draggable="true" src="Assets/road3.png">
+					      		<img draggable="true" src="Assets/road3.png">
+					      	</div>
+					      	<div id="background">
+
+					      	</div>
+				      	</div>
+			    	</div>
+				</div>
+				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="metrics">
+						<form class="form-inline">
+							<label class="mr-sm-2" for="inlineFormCustomSelect">Map Name</label>
+				  			<label class="sr-only" for="inlineFormInput"></label>
+							<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Map Name">
+							<button type="submit" class="btn btn-primary">Submit</button>
+				  		</form>
+					</div>
+				</div>
+			</div>
+    	</div>
+  	</div>
+</div>
+
+<script>
+		
+	$('.dropdown-item').on('click', function() {
+		let clicked = '#'+$(this).text();
+		let items = ['#roads', '#background']
+		items.forEach(function(item) {
+			$(item).hide();
+		});
+		$(clicked).show();
+	});
+	$('#myTab a').on('click', function (e) {
+		e.preventDefault()
+		$(this).tab('show');
+	})
+	function initCanvas() {
+	    $('.canvas-container').each(function(index) {
+	        var canvasContainer = $(this)[0];
+	        var canvasObject = $("canvas", this)[0];
+	        var url = $(this).data('floorplan');
+	        var canvas = window._canvas = new fabric.Canvas(canvasObject);
+
+	        var window_width = $(window).width();
+	        var window_height = $(window).height() - $('.furniture').height();
+	        canvas.setHeight(window_height);
+	        canvas.setWidth(window_width);
+	        canvas.setBackgroundImage(url, canvas.renderAll.bind(canvas));
+	        
+	        var imageOffsetX, imageOffsetY;
+
+	        function handleDragStart(e) {
+	            [].forEach.call(images, function (img) {
+	                img.classList.remove('img_dragging');
+	            });
+	            this.classList.add('img_dragging');
+	          
+	          
+	            var imageOffset = $(this).offset();
+	            imageOffsetX = e.clientX - imageOffset.left;
+	            imageOffsetY = e.clientY - imageOffset.top;
+	        }
+
+	        function handleDragOver(e) {
+	            if (e.preventDefault) {
+	                e.preventDefault();
+	            }
+	            e.dataTransfer.dropEffect = 'copy';
+	            return false;
+	        }
+
+	        function handleDragEnter(e) {
+	            this.classList.add('over');
+	        }
+
+	        function handleDragLeave(e) {
+	            this.classList.remove('over');
+	        }
+
+	        function handleDrop(e) {
+	            e = e || window.event;
+	            if (e.preventDefault) {
+	              e.preventDefault();
+	            }
+	            if (e.stopPropagation) {
+	                e.stopPropagation();
+	            }
+	            var img = document.querySelector('.furniture img.img_dragging');
+	          
+	            var offset = $(canvasObject).offset();
+	            var y = e.clientY - (offset.top + imageOffsetY);
+	            var x = e.clientX - (offset.left + imageOffsetX);
+	          
+	            var newImage = new fabric.Image(img, {
+	                width: img.width,
+	                height: img.height,
+	                left: x,
+	                top: y
+	            });
+	            canvas.add(newImage);
+	            return false;
+	        }
+
+	        function handleDragEnd(e) {
+	            [].forEach.call(images, function (img) {
+	                img.classList.remove('img_dragging');
+	            });
+	        }
+	      
+			var images = document.querySelectorAll('.furniture img');
+			[].forEach.call(images, function (img) {
+			img.addEventListener('dragstart', handleDragStart, false);
+			img.addEventListener('dragend', handleDragEnd, false);
+			});
+			canvasContainer.addEventListener('dragenter', handleDragEnter, false);
+			canvasContainer.addEventListener('dragover', handleDragOver, false);
+			canvasContainer.addEventListener('dragleave', handleDragLeave, false);
+			canvasContainer.addEventListener('drop', handleDrop, false);
+	    	
+	    	$('.metrics button').on('click', function() {
+				let json = JSON.stringify(canvas);
+				console.log(json);
+			
+			});
+	    });
+	}
+	initCanvas();
+
+	let navTabsHeight = $('.nav-tabs').height();
+	let furnitureHeight = $('.furniture').height();
+
+	$('.furniture').css("height", furnitureHeight - navTabsHeight);
+	let canvasHeight = $('.upper-canvas').height();
+	$('.section').css("position", "absolute");
+</script>

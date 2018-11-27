@@ -33,7 +33,7 @@ app.use((req, res, next)=> {
 });
 
 app.get('/', function(req, res) {
-    if(!req.session.user.username) {
+    if(!req.session.user) {
         res.redirect('/login');
     } else {
         res.render('index');

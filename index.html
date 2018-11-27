@@ -67,7 +67,7 @@
 			<div class="canvas-container" data-floorplan="http://familygardentrains.com/resource/brick_n_stone/stacked_stone_med.jpg">
 		      		<canvas></canvas>
 		    </div>
-			<div class="section">		    	
+			<div class="section" style="min-height:20%;">		    	
 		    	<div class="side">
 		    		<ul class="nav nav-tabs" id="myTab" role="tablist">
   						<li class="nav-item">
@@ -235,8 +235,6 @@
 		let furnitureHeight = $('.furniture').height();
 
 		$('.furniture').css("height", furnitureHeight - navTabsHeight);
-		let canvasHeight = $('.upper-canvas').height();
-		$('.section').css("margin-top", canvasHeight);
 		$('.section').css("position", "absolute");
 	</script>
 </html>

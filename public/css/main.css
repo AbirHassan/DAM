@@ -1,23 +1,18 @@
-#interface {
-	border-radius: 20px;
+.canvas-container {
+	height: calc(80vh);
+	width: 100%;
+	float: left;
 }
-
-* {
-	font-family: 'Lato', sans-serif;
+.furniture {
+    height: calc(30vh);
+    width: 100%;
 }
-
-#nav-bar {
-	height: 100px;
-	margin-top:0px;
-	display:block;
-	position:absolute;
-}
-
-#close-btn {
-	display:block;
-	float:right;
-}
-
-.furniture, .metrics {
-	margin: 1em;
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+    cursor: move;
 }
