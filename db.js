@@ -14,25 +14,19 @@ const User = new mongoose.Schema({
 });
 mongoose.model("User", User);
 
-/*
-const CanvasItem = new mongoose.Schema({
-
+const Asset = new mongoose.Schema({
+    name: String,
+    assetType: String,
 });
-*/
+mongoose.model("Asset", Asset);
 
 const Canvas = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
     name: {type: String, required: true},
-    material: {type: String, required: true},
-    items: [{
-      itemName: String,
-      width: Number,
-      length: Number,
-      Xpos: Number,
-      Ypos: Number 
-      //type: mongoose.Schema.Types.ObjectId, ref: 'CanvasItem'
-    }]
+    content: String
+    //type: mongoose.Schema.Types.ObjectId, ref: 'CanvasItem'
+    
 });
 mongoose.model("Canvas", Canvas);
-
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost/DAM', { useNewUrlParser: true });

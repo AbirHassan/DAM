@@ -26,7 +26,8 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							{{#each type}}
+							
+							{{!-- {{#each type}}
 								{{if type != 'Background'}}
 									<div id={{type}}>
 										{{#each type.assets}}
@@ -38,7 +39,8 @@
 										<img src="Assets/{{this}}">
 									</div>
 								{{/if}}
-						    {{/each}}
+						    {{/each}} --}}
+							
 
 							<div id="roads">
 						    	<img draggable="true" src="Assets/road1.png">
@@ -171,7 +173,19 @@
 	    	
 	    	$('.metrics button').on('click', function() {
 				let json = JSON.stringify(canvas);
-				console.log(json);
+				//alert(json);
+				//alert($('#inlineFormInput').val());
+				$.ajax({
+					type: 'POST',
+					url: '/addCanvas',
+					data: JSON.stringify({
+						name: $('#inlineFormInput').val(),
+						content: json
+					}),
+					success: function(data) {alert('data ' + data); },
+					contentType: "application/json",
+					dataType: 'json'
+				});
 			
 			});
 	    });

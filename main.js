@@ -12,7 +12,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 const Canvas = mongoose.model('Canvas');
-//const MenuItem = mongoose.model('MenuItem');
+const Asset = mongoose.model('Asset');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
@@ -37,6 +37,34 @@ app.get('/', function(req, res) {
         res.redirect('/login');
     } else {
         res.render('index');
+    }
+});
+
+/*app.get('/addCanvas', function(req, res) {
+    if(!req.session.user) {
+        res.redirect('/login');
+    } else {
+        res.render('canvas-add');
+    }
+});*/
+
+app.post('/addCanvas', (req, res) => {
+    if(!req.session.user.username) {
+        res.redirect('/login');
+    } else {
+        const newCanvas = new Canvas({
+		    name: req.body.name,
+            user: req.session.user._id,
+            content: req.body.content
+		});
+		
+	    newCanvas.save( (err, newRest) => {
+            if(err) {
+                res.render('canvas-add', {message: "Failed"});
+            } else {
+                res.redirect('/');
+            }
+        });
     }
 });
 
