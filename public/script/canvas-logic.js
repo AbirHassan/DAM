@@ -1,90 +1,14 @@
-<div class="fullpage">
-	<div class="canvas-container" data-floorplan="http://familygardentrains.com/resource/brick_n_stone/stacked_stone_med.jpg">
-      	<canvas id="canvas"></canvas>
-    </div>
-	<div class="section" style="height:40%">		    	
-    	<div class="side">
-    		<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active" id="assets-tab" data-toggle="tab" href="#assets" role="tab" aria-controls="assets" aria-selected="true">Assets</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Metrics</a>
-				</li>
-			</ul>
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="assets" role="tabpanel" aria-labelledby="assets-tab">
-					<div class="furniture">
-						<div class="dropdown">
-							Choose type of asset: 
-							<button class="btn dropdown-toggle" type="button" id="assetChoice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							asset type
-							</button>
-							<div class="dropdown-menu" aria-labelledby="assetChoice">
-								<a class="dropdown-item" href="#roads">roads</a>
-								<a class="dropdown-item" href="#background">background tiles</a>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							
-							{{!-- {{#each type}}
-								{{if type != 'Background'}}
-									<div id={{type}}>
-										{{#each type.assets}}
-											<img draggable="true" src="Assets/{{this}}">
-										{{/each}}
-									</div>
-								{{else}}
-									<div id={{type}}>
-										<img src="Assets/{{this}}">
-									</div>
-								{{/if}}
-						    {{/each}} --}}
-							
 
-							<div id="roads">
-						    	<img draggable="true" src="Assets/road1.png">
-						      	<img draggable="true" src="Assets/road2.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
-					      	</div>
-					      	<div id="background">
-
-					      	</div>
-				      	</div>
-			    	</div>
-				</div>
-				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="metrics">
-						<form class="form-inline">
-							<label class="mr-sm-2" for="inlineFormCustomSelect">Map Name</label>
-				  			<label class="sr-only" for="inlineFormInput"></label>
-							<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Map Name">
-							<button type="submit" class="btn btn-primary">Submit</button>
-				  		</form>
-					</div>
-				</div>
-			</div>
-    	</div>
-  	</div>
-</div>
-
-<script src="/script/ui-logic.js" crossorigin="anonymous"></script>
-<script>
 function initCanvas() {
     $('.canvas-container').each(function(index) {
         var canvasContainer = $(this)[0];
         var canvasObject = $("canvas", this)[0];
         var url = $(this).data('floorplan');
         var canvas = window._canvas = new fabric.Canvas(canvasObject);
-        
+        console.log(req.session.hello);
         var loadedCanvas = {{{canvas}}} 
         if (loadedCanvas != false) {
+        	// loadedCanvas = JSON.parse(loadedCanvas);
         	canvas.loadFromJSON(loadedCanvas)
         }
         console.log({{{canvas}}});
@@ -182,4 +106,4 @@ function initCanvas() {
     });
 }
 initCanvas();
-</script>
+

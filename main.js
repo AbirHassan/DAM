@@ -42,13 +42,13 @@ app.use((req, res, next) => {
 });
 */
 app.get('/', function(req, res) {
+    req.session.hello = "helloworld"
     if(!req.session.user) {
         res.redirect('/login');
     } else {
         if (req.query.edit != undefined) {
             Canvas.findOne({user:res.locals.user._id, name: req.query.edit}, (err, curr) => {
-                console.log(curr.content);
-                res.render,('index', {canvas: JSON.stringify(curr.content)});
+                res.render('index', {canvas: curr.content});
             });
         } else {
             res.render('index', {canvas:false});
