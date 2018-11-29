@@ -19,6 +19,7 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(session({
 	secret: 'keyboard cat',
@@ -30,6 +31,14 @@ app.use(session({
 app.use((req, res, next)=> {
     res.locals.user = req.session.user;
     next();
+});
+
+app.use((req, res, next) => {
+  console.log(req.method, req.path);
+  console.log("=====");
+  console.log("req.query: ", req.query);
+  console.log("req.body: ", req.body);
+  next();
 });
 
 app.get('/', function(req, res) {
@@ -52,37 +61,21 @@ app.post('/addCanvas', (req, res) => {
     if(!req.session.user.username) {
         res.redirect('/login');
     } else {
+        console.log("saving canvas");
         const newCanvas = new Canvas({
 		    name: req.body.name,
             user: req.session.user._id,
             content: req.body.content
 		});
 		
-	    newCanvas.save( (err, newRest) => {
+	    newCanvas.save( (err, newCanvas) => {
             if(err) {
+                console.log("Failed");
                 res.render('canvas-add', {message: "Failed"});
             } else {
                 res.redirect('/');
             }
         });
-    }
-});
-
-app.get('/canvas/add', (req, res) => {
-    if(!req.session.user.username) {
-        res.redirect('/login');
-    } else {
-        res.render('canvas-add');
-    }
-});
-
-app.post('/canvas/add', (req, res) => {
-    if(!req.session.user.username) {
-        res.redirect('/login');
-    } else {
-        
-
-        res.redirect('/');
     }
 });
 

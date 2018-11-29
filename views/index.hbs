@@ -173,19 +173,16 @@
 	    	
 	    	$('.metrics button').on('click', function() {
 				let json = JSON.stringify(canvas);
-				//alert(json);
-				//alert($('#inlineFormInput').val());
-				$.ajax({
-					type: 'POST',
-					url: '/addCanvas',
-					data: JSON.stringify({
+				fetch('/addCanvas', {
+					method: 'POST',
+					headers: {
+    					"Content-Type": "application/json"
+  					},
+					body: JSON.stringify({
 						name: $('#inlineFormInput').val(),
 						content: json
-					}),
-					success: function(data) {alert('data ' + data); },
-					contentType: "application/json",
-					dataType: 'json'
-				});
+					})
+				}).then(response => response.text())
 			
 			});
 	    });
