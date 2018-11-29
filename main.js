@@ -49,13 +49,19 @@ app.get('/', function(req, res) {
     }
 });
 
-/*app.get('/addCanvas', function(req, res) {
+app.get('/editCanvas', function(req, res) {
     if(!req.session.user) {
         res.redirect('/login');
     } else {
-        res.render('canvas-add');
+        Canvas.find({user:res.locals.user._id}, (err, canvases) => {
+			if(err) {
+				console.log(err);
+			} else {
+                res.render('canvas-edit', {canvases});
+			}
+        });
     }
-});*/
+});
 
 app.post('/addCanvas', (req, res) => {
     if(!req.session.user.username) {
