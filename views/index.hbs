@@ -93,7 +93,12 @@
 	        var canvasContainer = $(this)[0];
 	        var canvasObject = $("canvas", this)[0];
 	        var url = $(this).data('floorplan');
-	        var canvas = window._canvas = new fabric.Canvas(canvasObject);
+	        if ({{{canvas}}} != false) {
+				var canvas = window._canvas = new fabric.Canvas({{{canvas}}});	        	
+	        } else {
+				var canvas = window._canvas = new fabric.Canvas(canvasObject);	        	
+	        }
+	        console.log({{{canvas}}});
 
 	        var window_width = $(window).width();
 	        var window_height = $(window).height() - $('.furniture').height();

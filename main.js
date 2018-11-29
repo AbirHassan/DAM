@@ -32,7 +32,7 @@ app.use((req, res, next)=> {
     res.locals.user = req.session.user;
     next();
 });
-
+/*
 app.use((req, res, next) => {
   console.log(req.method, req.path);
   console.log("=====");
@@ -40,12 +40,19 @@ app.use((req, res, next) => {
   console.log("req.body: ", req.body);
   next();
 });
-
+*/
 app.get('/', function(req, res) {
     if(!req.session.user) {
         res.redirect('/login');
     } else {
-        res.render('index');
+        if (req.query.edit != undefined) {
+            Canvas.findOne({user:res.locals.user._id, name: req.query.edit}, (err, curr) => {
+                console.log(curr.content);
+                res.render,('index', {canvas: JSON.stringify(curr.content)});
+            });
+        } else {
+            res.render('index', {canvas:false});
+        }
     }
 });
 
