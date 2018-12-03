@@ -42,16 +42,16 @@ app.use((req, res, next) => {
 });
 */
 app.get('/', function(req, res) {
-    req.session.hello = "helloworld"
     if(!req.session.user) {
         res.redirect('/login');
     } else {
         if (req.query.edit != undefined) {
             Canvas.findOne({user:res.locals.user._id, name: req.query.edit}, (err, curr) => {
-                res.render('index', {canvas: curr.content});
+                console.log(curr.name);
+                res.render('index', {canvas: curr.content, canvas_name: curr.name, homepage: true});
             });
         } else {
-            res.render('index', {canvas:false});
+            res.render('index', {canvas: false});
         }
     }
 });
@@ -74,21 +74,34 @@ app.post('/addCanvas', (req, res) => {
     if(!req.session.user.username) {
         res.redirect('/login');
     } else {
-        console.log("saving canvas");
-        const newCanvas = new Canvas({
-		    name: req.body.name,
-            user: req.session.user._id,
-            content: req.body.content
-		});
-		
-	    newCanvas.save( (err, newCanvas) => {
-            if(err) {
-                console.log("Failed");
-                res.render('canvas-add', {message: "Failed"});
-            } else {
-                res.redirect('/');
-            }
-        });
+        let canvasContent = req.body.content;
+        let canvasName = req.body.name;
+
+        Canvas.findOne({'name': canvasName, 'user': req.session.user._id}, 
+            function(err, app) {
+                if (app === null) {
+                    new Canvas({
+                        name: canvasName,
+                        user: req.session.user._id,
+                        content: canvasContent
+                    }).save(function (err, newCanvas) {
+                        console.log("save success!");
+                        return res.redirect('/editCanvas');
+                    });
+                } else {
+                    Canvas.findOneAndUpdate({'name': req.body.name, 'user': req.session.user._id}, {
+                        $set: {
+                            content: canvasContent
+                        }
+                    }, function(err, canvas) {
+                        if (err) {
+                            res.redirect('/editCanvas');
+                        } else {
+                            res.redirect('/editCanvas');
+                        }
+                    });
+                };
+            });
     }
 });
 

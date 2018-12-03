@@ -1,3 +1,4 @@
+
 <div class="fullpage">
 	<div class="canvas-container" data-floorplan="http://familygardentrains.com/resource/brick_n_stone/stacked_stone_med.jpg">
       	<canvas id="canvas"></canvas>
@@ -60,13 +61,8 @@
 			    	</div>
 				</div>
 				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="metrics">
-						<form class="form-inline">
-							<label class="mr-sm-2" for="inlineFormCustomSelect">Map Name</label>
-				  			<label class="sr-only" for="inlineFormInput"></label>
-							<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Map Name">
-							<button type="submit" class="btn btn-primary">Submit</button>
-				  		</form>
+					<div class="container">
+						Metrics here
 					</div>
 				</div>
 			</div>
@@ -74,7 +70,7 @@
   	</div>
 </div>
 
-<script src="/script/ui-logic.js" crossorigin="anonymous"></script>
+
 <script>
 function initCanvas() {
     $('.canvas-container').each(function(index) {
@@ -83,11 +79,10 @@ function initCanvas() {
         var url = $(this).data('floorplan');
         var canvas = window._canvas = new fabric.Canvas(canvasObject);
         
-        var loadedCanvas = {{{canvas}}} 
+        var loadedCanvas = {{{canvas}}};
         if (loadedCanvas != false) {
-        	canvas.loadFromJSON(loadedCanvas)
+        	canvas.loadFromJSON(loadedCanvas);
         }
-        console.log({{{canvas}}});
 
         var window_width = $(window).width();
         var window_height = $(window).height() - $('.furniture').height();
@@ -165,21 +160,38 @@ function initCanvas() {
 		canvasContainer.addEventListener('dragleave', handleDragLeave, false);
 		canvasContainer.addEventListener('drop', handleDrop, false);
     	
-    	$('.metrics button').on('click', function() {
+    	$('#save').on('click', function() {
+    		let canvasName = $(this).attr("data-canvas") || $('#inlineFormInput').val();
 			let json = JSON.stringify(canvas);
+			console.log(json);
+/*
+			$.ajax({
+			    type: "POST",
+			    url: '/addCanvas',
+			    data: JSON.stringify({
+					name: canvasName,
+					content: json
+				}),
+			    dataType: "json",
+			    success: function(data, textStatus) {
+			        window.location.href = "/editCanvas";
+			    }
+			});
+*/
 			fetch('/addCanvas', {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json"
 					},
 				body: JSON.stringify({
-					name: $('#inlineFormInput').val(),
+					name: canvasName,
 					content: json
 				})
-			}).then(response => response.text())
-		
+			});
+
 		});
     });
 }
 initCanvas();
 </script>
+<script src="/script/ui-logic.js" crossorigin="anonymous"></script>

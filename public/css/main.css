@@ -4,9 +4,15 @@
 	float: left;
 }
 .furniture {
-    height: calc(30vh);
-    width: 100%;
+    height: 30vh;
+    width: 100vw;
+    background-color: white;
 }
+
+.side {
+    position:absolute;
+}
+
 [draggable] {
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -15,4 +21,11 @@
     -khtml-user-drag: element;
     -webkit-user-drag: element;
     cursor: move;
+}
+.col-sm-6 {
+    margin-bottom: 1em;
+}
+
+a.nav-link {
+    display: inline-block;
 }
