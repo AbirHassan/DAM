@@ -4,36 +4,58 @@
 	<meta charset="utf-8">
 	<title>DAM</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="/css/site.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 	<script
 	src="https://code.jquery.com/jquery-3.1.1.min.js"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/script/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-	  <a class="navbar-brand" href="/">DAM</a>
+	  <a class="navbar-brand" href="/"><img src="/img/dam_logo.png" style="height: 64px;">DAM</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 
-	  {{#if user}}
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item">
-		    <a class="nav-link" href="/editCanvas">Previous Designs</a>
-		  </li>
-			<li>
-				<a href="/addCanvas"> Add a Canvas</a>
-			</li>
-		</ul>
-		<a href="/logout"><button type="button" class="btn btn-outline-danger" style="margin-left: 0.5rem;">Log out</button></a>
-		</div>
+	  	{{#if user}}
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item">
+			    <a class="nav-link" href="/editCanvas">Previous Designs</a>
+			    <a class="nav-link" href="/#">Add Canvas</a>
+			  </li>
+			</ul>
+			{{#if canvas}}
+				<a href="/editCanvas"><button id="save" type="button" class="btn btn-outline-info" data-canvas="{{canvas_name}}">Save Canvas</button></a>
+			{{else}}
+				<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Create Canvas</button>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				        <label class="mr-sm-2" for="inlineFormCustomSelect">Create and save your map design by entering a name below: </label>
+			  			<label class="sr-only" for="inlineFormInput"></label>
+						<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="placeholder map name">
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <a href="/editCanvas">
+				        	<button id="save" type="button" class="btn btn-outline-info">Create</button>
+				        </a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			{{/if}}
+			<a href="/logout"><button type="button" class="btn btn-outline-danger" style="margin-left: 0.5rem;">Log out</button></a>
+			</div>
 		{{else}}
 			<a href="/login"><button type="button" class="btn btn-outline-danger" style="margin-left: 0.5rem;">Log in</button></a>
 			<a href="/register"><button type="button" class="btn btn-outline-danger" style="margin-left: 0.5rem;">Register</button></a>

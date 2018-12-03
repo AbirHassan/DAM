@@ -13,8 +13,7 @@ $('#myTab a').on('click', function (e) {
 });
 
 let navTabsHeight = $('.nav-tabs').height();
-let furnitureHeight = $('.furniture').height();
 
-$('.furniture').css("height", furnitureHeight - navTabsHeight);
 let canvasHeight = $('.upper-canvas').height();
-$('.section').css("position", "absolute");
+$('.side').css("position", "absolute");
+$('.side').css("margin-top", `${canvasHeight}px`);

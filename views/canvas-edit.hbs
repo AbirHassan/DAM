@@ -1,4 +1,32 @@
-<h2>Edit existing Canvas</h2>
-{{#each canvases}}
-  	<p><a href="/?edit={{this.name}}">{{this.name}}</a></p>
-{{/each}}
+<style>
+button.btn.btn-outline-info {
+	display: none;
+}
+</style>
+
+<h3 style="text-align:center;">Edit Existing Canvas</h3>
+
+<div class="container">
+	<div class="card-columns">
+		{{#each canvases}}
+			<div class="card p-3">
+				<div class="card-body">
+					<h5 class="card-title">{{this.name}}</h5>
+					<a href="/?edit={{this.name}}">Edit Map</a>
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</div>
+
+<script>
+	let cards = $('.card');
+	for (let i = 0; i < cards.length; i++) {
+		if (i % 2 == 0) {
+			console.log('hello');
+			console.log(cards[i])
+			$(cards[i]).removeClass('p-3');
+		}
+	}
+
+</script>
