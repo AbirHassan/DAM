@@ -86,8 +86,9 @@ app.post('/addCanvas', (req, res) => {
                         content: canvasContent
                     }).save(function (err, newCanvas) {
                         console.log("save success!");
-                        return res.redirect('/editCanvas');
+                        // res.redirect('/editCanvas');
                     });
+                    res.redirect('/editCanvas');
                 } else {
                     Canvas.findOneAndUpdate({'name': req.body.name, 'user': req.session.user._id}, {
                         $set: {

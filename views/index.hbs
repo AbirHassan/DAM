@@ -163,7 +163,6 @@ function initCanvas() {
     	$('#save').on('click', function() {
     		let canvasName = $(this).attr("data-canvas") || $('#inlineFormInput').val();
 			let json = JSON.stringify(canvas);
-			console.log(json);
 /*
 			$.ajax({
 			    type: "POST",
