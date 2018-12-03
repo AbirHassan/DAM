@@ -92,6 +92,29 @@ app.post('/addCanvas', (req, res) => {
     }
 });
 
+app.post('/generateMetrics', (req, res) => {
+    if(!req.session.user.username) {
+        res.redirect('/login');
+    } else {
+        console.log("Generating metrics for canvas: ");
+        let json = JSON.parse(req.body.content) //.objects
+
+        for(let index in json.objects)
+        {
+            console.log(json.objects[index].src)
+        }
+		
+	    // newCanvas.save( (err, newCanvas) => {
+        //     if(err) {
+        //         console.log("Failed");
+        //         res.render('canvas-add', {message: "Failed"});
+        //     } else {
+        //         res.redirect('/');
+        //     }
+        // });
+    }
+});
+
 app.get('/register', (req, res) => {
     res.render('register');
 });

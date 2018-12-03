@@ -65,8 +65,11 @@
 							<label class="mr-sm-2" for="inlineFormCustomSelect">Map Name</label>
 				  			<label class="sr-only" for="inlineFormInput"></label>
 							<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Map Name">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary">Save As</button>
 				  		</form>
+					</div>
+					<div class="generate">
+						<button type="submit" class="btn btn-primary">Generate!</button>
 					</div>
 				</div>
 			</div>
@@ -168,6 +171,21 @@ function initCanvas() {
     	$('.metrics button').on('click', function() {
 			let json = JSON.stringify(canvas);
 			fetch('/addCanvas', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json"
+					},
+				body: JSON.stringify({
+					name: $('#inlineFormInput').val(),
+					content: json
+				})
+			}).then(response => response.text())
+		
+		});
+
+		$('.generate button').on('click', function() {
+			let json = JSON.stringify(canvas, null, 4);
+			fetch('/generateMetrics', {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json"

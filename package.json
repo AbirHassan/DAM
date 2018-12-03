@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "express-session": "^1.15.6",
     "mongoose": "^5.3.14",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.7"
   }
 }
