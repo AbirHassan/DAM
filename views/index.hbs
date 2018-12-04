@@ -24,7 +24,7 @@
 							<div class="dropdown-menu" aria-labelledby="assetChoice">
 								<a class="dropdown-item" href="#roads">roads</a>
 								<a class="dropdown-item" href="#background">background tiles</a>
-								<a class="dropdown-item" href="#traffic control">traffic control</a>
+								<a class="dropdown-item" href="#traffic">traffic control</a>
 								<a class="dropdown-item" href="#nature">nature</a>
 								<a class="dropdown-item" href="#railroads">railroads</a>
 							</div>
@@ -51,7 +51,14 @@
 						      	<img class="road" draggable="true" src="Assets/Roads/4-way-intersection.png">
 						      	<img class="road" draggable="true" src="Assets/Roads/t-intersection.png">
 					      	</div>
-					      	<!--<div id="background">
+							<div id="traffic">
+						    	<img class="traffic" draggable="true" src="Assets/Traffic/stop-sign.png">
+						      	<img class="traffic" draggable="true" src="Assets/Traffic/traffic-light.png">
+					      	</div>
+							<div id="nature">
+						    	<img class="nature" draggable="true" src="Assets/Nature/tree.png">					      	</div>
+				      		</div>
+							<div id="background">
 								<img class="background" src="Assets/Backgrounds/circles-light.png">
 						      	<img class="background" src="Assets/Backgrounds/country-quilt-dark.png">
 						      	<img class="background" src="Assets/Backgrounds/country-quilt.png">
@@ -61,14 +68,7 @@
 						      	<img class="background" src="Assets/Backgrounds/stripes-light.png">
 						      	<img class="background" src="Assets/Backgrounds/tiny-squares.png">
 						      	<img class="background" src="Assets/Backgrounds/what-the-hex.png">
-					      	</div>-->
-							<div id="traffic">
-						    	<img class="traffic" draggable="true" src="Assets/Traffic/stop-sign.png">
-						      	<img class="traffic" draggable="true" src="Assets/Traffic/traffic-light.png">
 					      	</div>
-							<div id="nature">
-						    	<img class="nature" draggable="true" src="Assets/Nature/tree.png">					      	</div>
-				      		</div>
 			    	</div>
 				</div>
 				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -216,6 +216,8 @@ function initCanvas() {
 			elem[1].style.width = safety*width + '%';
 			elem[2].style.width = noise*width + '%';
 		}
+
+		
       
 		var images = document.querySelectorAll('.furniture img');
 		[].forEach.call(images, function (img) {

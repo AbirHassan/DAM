@@ -1,6 +1,6 @@
 $('.dropdown-item').on('click', function() {
 	let clicked = '#'+$(this).text();
-	let items = ['#roads', '#background'];
+	let items = ['#roads', '#background', '#traffic', '#nature', '#railroads'];
 	items.forEach(function(item) {
 		$(item).hide();
 	});
