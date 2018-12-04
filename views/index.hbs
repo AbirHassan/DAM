@@ -118,6 +118,8 @@ function initCanvas() {
         
         var imageOffsetX, imageOffsetY;
 
+        $('')
+
         function handleDragStart(e) {
             [].forEach.call(images, function (img) {
                 img.classList.remove('img_dragging');
@@ -236,31 +238,15 @@ function initCanvas() {
 		canvasContainer.addEventListener('drop', move_bar, false);
 
 		$('.background').on('click', function() {
-			// get the link of the url here & do the canavas.setBackground thing
-			console.log("hi");
-			//container.dataset.floorplan = "Assets/Backgrounds/qbkls.png";
-			console.log({{backgrounds}});
-			//let random_number = Math.random() * {{{backgrounds.length}}};
-			//console.log(random_number);
+			let url = this.src;
+			canvas.setBackgroundColor({source: url, repeat: 'repeat'}, function() {
+				canvas.renderAll();
+			});
 		});
     	
     	$('#save').on('click', function() {
     		let canvasName = $(this).attr("data-canvas") || $('#inlineFormInput').val();
 			let json = JSON.stringify(canvas);
-/*
-			$.ajax({
-			    type: "POST",
-			    url: '/addCanvas',
-			    data: JSON.stringify({
-					name: canvasName,
-					content: json
-				}),
-			    dataType: "json",
-			    success: function(data, textStatus) {
-			        window.location.href = "/editCanvas";
-			    }
-			});
-*/
 			fetch('/addCanvas', {
 				method: 'POST',
 				headers: {
