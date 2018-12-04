@@ -76,16 +76,16 @@
 				
 				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<h3>Traffic</h3>
-					<div class="metrics_bar1">
-						<div id="traffic_bar" class="metrics_bar2"></div>
+					<div class="progress">
+						<div id="progress_bar1" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<h3>Safety</h3>
-					<div class="metrics_bar1">
-						<div id="safety_bar" class="metrics_bar2"></div>
+					<div class="progress">
+						<div id="progress_bar1" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 					<h3>Noise</h3>
-					<div class="metrics_bar1">
-						<div id="noise_bar" class="metrics_bar2"></div>
+					<div class="progress">
+						<div id="progress_bar1" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 					</div>
 				</div>
 			</div>
@@ -117,8 +117,6 @@ function initCanvas() {
 		});
         
         var imageOffsetX, imageOffsetY;
-
-        $('')
 
         function handleDragStart(e) {
             [].forEach.call(images, function (img) {
@@ -179,7 +177,7 @@ function initCanvas() {
         }
 		
 		function move_bar() {
-    		let elem = document.getElementsByClassName("metrics_bar2"); 
+    		let elem = document.getElementsByClassName("progress-bar"); 
 			let width = 50;
 			let json = JSON.stringify(canvas, null, 4);
 			json = JSON.parse(json);
