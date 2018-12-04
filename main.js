@@ -111,7 +111,7 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    auth.register(req.body.username, req.body.email, req.body.password, (err) => {
+    auth.register(req.body.username, req.body.password, (err) => {
         res.render('register', {message: err.message});
     },
     (user) => {

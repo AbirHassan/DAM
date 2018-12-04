@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('User');
 
-function register(username, email, password, errorCallback, successCallback) {
+function register(username, password, errorCallback, successCallback) {
   if(username.length < 8 || password.length < 8) {
     errorCallback({message:"USERNAME PASSWORD TOO SHORT"});
   } else {
@@ -14,7 +14,7 @@ function register(username, email, password, errorCallback, successCallback) {
       } else {
         // if the user doesn't exist yet, then it's ok to go ahead and create a new user…
         // you can use a default value of 10 for salt rounds 
-        const saltRounds = 10;
+        const saltRounds = 1;
         bcrypt.hash(password, saltRounds, function(err, hash) {
           // do more stuff here!
           const newUser = new User({
