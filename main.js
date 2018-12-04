@@ -56,6 +56,22 @@ app.get('/', function(req, res) {
     }
 });
 
+app.get('/delete', function(req, res) {
+    if(!req.session.user) {
+        res.redirect('/login');
+    } else {
+        if (req.query.name != undefined) {
+            Canvas.deleteOne({user:res.locals.user._id, name: req.query.name}, (err, curr) => {
+                console.log(curr.name);
+                //res.render('index', {canvas: curr.content, canvas_name: curr.name, homepage: true});
+                res.redirect('/');
+            });
+        } else {
+            res.render('index', {canvas: false});
+        }
+    }
+});
+
 app.get('/editCanvas', function(req, res) {
     if(!req.session.user) {
         res.redirect('/login');
