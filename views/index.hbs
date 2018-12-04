@@ -235,6 +235,14 @@ function initCanvas() {
 		//canvasContainer.addEventListener('drop', generateMetrics, false);
 		canvasContainer.addEventListener('drop', move_bar, false);
 
+		$('.background').on('click', function() {
+			// get the link of the url here & do the canavas.setBackground thing
+			console.log("hi");
+			//container.dataset.floorplan = "Assets/Backgrounds/qbkls.png";
+			console.log({{backgrounds}});
+			//let random_number = Math.random() * {{{backgrounds.length}}};
+			//console.log(random_number);
+		});
     	
     	$('#save').on('click', function() {
     		let canvasName = $(this).attr("data-canvas") || $('#inlineFormInput').val();
@@ -263,7 +271,6 @@ function initCanvas() {
 					content: json
 				})
 			});
-
 		});
     });
 }
