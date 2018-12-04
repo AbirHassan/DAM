@@ -87,7 +87,10 @@
 								  </button>
 								  <div class="dropdown-menu" aria-labelledby="assetChoice">
 								    <a class="dropdown-item" href="#roads">roads</a>
-								    <a class="dropdown-item" href="#background">background tiles</a>
+									<a class="dropdown-item" href="#background">background tiles</a>
+									<a class="dropdown-item" href="#traffic control">traffic control</a>
+									<a class="dropdown-item" href="#nature">background tiles</a>
+									<a class="dropdown-item" href="#railroads">roads</a>
 								  </div>
 								</div>
   								<div class="panel panel-default">
@@ -129,7 +132,7 @@
 		
 		$('.dropdown-item').on('click', function() {
 			let clicked = '#'+$(this).text();
-			let items = ['#roads', '#background']
+			let items = ['#roads', '#background', '#traffic control', '#nature', '#railroads']
 			items.forEach(function(item) {
 				$(item).hide();
 			});

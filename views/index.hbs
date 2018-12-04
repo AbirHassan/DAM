@@ -1,6 +1,6 @@
 
 <div class="fullpage">
-	<div class="canvas-container" data-floorplan="http://familygardentrains.com/resource/brick_n_stone/stacked_stone_med.jpg">
+	<div class="canvas-container" data-floorplan="Assets/Backgrounds/circles-light.png">
       	<canvas id="canvas"></canvas>
     </div>
 	<div class="section" style="height:40%">		    	
@@ -24,6 +24,9 @@
 							<div class="dropdown-menu" aria-labelledby="assetChoice">
 								<a class="dropdown-item" href="#roads">roads</a>
 								<a class="dropdown-item" href="#background">background tiles</a>
+								<a class="dropdown-item" href="#traffic control">traffic control</a>
+								<a class="dropdown-item" href="#nature">nature</a>
+								<a class="dropdown-item" href="#railroads">railroads</a>
 							</div>
 						</div>
 						<div class="panel panel-default">
@@ -44,33 +47,42 @@
 							
 
 							<div id="roads">
-						    	<img draggable="true" src="Assets/road1.png">
-						      	<img draggable="true" src="Assets/road2.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-						      	<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
-					      		<img draggable="true" src="Assets/road3.png">
+						    	<img class="road" draggable="true" src="Assets/Roads/straight.png">
+						      	<img class="road" draggable="true" src="Assets/Roads/4-way-intersection.png">
+						      	<img class="road" draggable="true" src="Assets/Roads/t-intersection.png">
 					      	</div>
-					      	<div id="background">
-
+					      	<!--<div id="background">
+								<img class="background" draggable="true" src="Assets/Backgrounds/circles-light.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/country-quilt-dark.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/country-quilt.png">
+								<img class="background" draggable="true" src="Assets/Backgrounds/leaves-pattern.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/leaves.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/qbkls.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/stripes-light.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/tiny-squares.png">
+						      	<img class="background" draggable="true" src="Assets/Backgrounds/what-the-hex.png">
+					      	</div>-->
+							<div id="traffic">
+						    	<img class="traffic" draggable="true" src="Assets/Traffic/stop-sign.png">
+						      	<img class="traffic" draggable="true" src="Assets/Traffic/traffic-light.png">
 					      	</div>
-				      	</div>
+							<div id="nature">
+						    	<img class="nature" draggable="true" src="Assets/Nature/tree.png">					      	</div>
+				      		</div>
 			    	</div>
 				</div>
 				<div class="tab-pane fade panel panel-default" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="metrics">
-						<form class="form-inline">
-							<label class="mr-sm-2" for="inlineFormCustomSelect">Map Name</label>
-				  			<label class="sr-only" for="inlineFormInput"></label>
-							<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Map Name">
-							<button type="submit" class="btn btn-primary">Save As</button>
-				  		</form>
+					<h3>Traffic</h3>
+					<div class="metrics_bar1">
+						<div id="traffic_bar" class="metrics_bar2"></div>
 					</div>
-					<div class="generate">
-						<button type="submit" class="btn btn-primary">Generate!</button>
+					<h3>Safety</h3>
+					<div class="metrics_bar1">
+						<div id="safety_bar" class="metrics_bar2"></div>
+					</div>
+					<h3>Noise</h3>
+					<div class="metrics_bar1">
+						<div id="noise_bar" class="metrics_bar2"></div>
 					</div>
 				</div>
 			</div>
@@ -96,7 +108,10 @@ function initCanvas() {
         var window_height = $(window).height() - $('.furniture').height();
         canvas.setHeight(window_height);
         canvas.setWidth(window_width);
-        canvas.setBackgroundImage(url, canvas.renderAll.bind(canvas));
+		
+        canvas.setBackgroundColor({source: url, repeat: 'repeat'}, function() {
+			canvas.renderAll();
+		});
         
         var imageOffsetX, imageOffsetY;
 
@@ -157,6 +172,50 @@ function initCanvas() {
                 img.classList.remove('img_dragging');
             });
         }
+		
+		function move_bar() {
+    		let elem = document.getElementsByClassName("metrics_bar2"); 
+			let width = 50;
+			let json = JSON.stringify(canvas, null, 4);
+			json = JSON.parse(json);
+
+			let noise = 0;
+			let safety = 0;
+			let traffic_efficiency = 0;
+			let road_elements = 0;
+			let traffic_elements = 0;
+			let nature_elements = 0;
+			let railroad_elements = 0;
+
+			for(let index in json.objects) {
+				console.log(json.objects[index].src);
+				if (json.objects[index].src.includes("Road")) {
+					road_elements += 1;
+				}
+				else if (json.objects[index].src.includes("Traffic")) {
+					traffic_elements += 1;
+				}
+				else if (json.objects[index].src.includes("Nature")) {
+					nature_elements += 1;
+				}
+				else if (json.objects[index].src.includes("Railroad")) {
+					railroad_elements += 1;
+				}
+			}
+
+			noise = (road_elements + railroad_elements ) / nature_elements;
+			console.log("Noise",noise);
+
+			safety = traffic_elements / (road_elements + railroad_elements);
+			console.log("Safety", safety);
+
+			traffic_efficiency = (road_elements + railroad_elements) / traffic_elements;
+			console.log("Traffic Efficiency", traffic_efficiency);
+
+			elem[0].style.width = traffic_efficiency*width + '%';
+			elem[1].style.width = safety*width + '%';
+			elem[2].style.width = noise*width + '%';
+		}
       
 		var images = document.querySelectorAll('.furniture img');
 		[].forEach.call(images, function (img) {
@@ -167,6 +226,10 @@ function initCanvas() {
 		canvasContainer.addEventListener('dragover', handleDragOver, false);
 		canvasContainer.addEventListener('dragleave', handleDragLeave, false);
 		canvasContainer.addEventListener('drop', handleDrop, false);
+
+		//canvasContainer.addEventListener('drop', generateMetrics, false);
+		canvasContainer.addEventListener('drop', move_bar, false);
+
     	
     	$('#save').on('click', function() {
     		let canvasName = $(this).attr("data-canvas") || $('#inlineFormInput').val();
@@ -196,21 +259,6 @@ function initCanvas() {
 				})
 			});
 
-		});
-
-		$('.generate button').on('click', function() {
-			let json = JSON.stringify(canvas, null, 4);
-			fetch('/generateMetrics', {
-				method: 'POST',
-				headers: {
-					"Content-Type": "application/json"
-					},
-				body: JSON.stringify({
-					name: $('#inlineFormInput').val(),
-					content: json
-				})
-			}).then(response => response.text())
-		
 		});
     });
 }

@@ -9,6 +9,33 @@
     background-color: white;
 }
 
+.road {
+    height: 80px;
+    width: 80px;
+}
+
+.traffic {
+    height: 50px;
+    width: 50px;
+}
+
+.nature {
+    height: 50px;
+    width: 50px;
+}
+
+.metrics_bar1 {
+    width: 100%;
+    background-color: grey;
+}
+
+.metrics_bar2 {
+    width: 1%;
+    height: 30px;
+    max-width: 100%;
+    background-color: green;
+}
+
 .side {
     position:absolute;
 }
