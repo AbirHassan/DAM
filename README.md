@@ -36,4 +36,4 @@ http://fabricjs.com/fabric-intro-part-3
 - to start the project, run `npm start` or `node main.js`
 - the project should be running on `localhost:3000`
 
-## [Link to Initial Main Project File](https://design-a-map.herokuapp.com)
+## [Deployed Application on Heroku](https://design-a-map.herokuapp.com)
