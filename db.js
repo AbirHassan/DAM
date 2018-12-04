@@ -29,4 +29,8 @@ const Canvas = new mongoose.Schema({
 });
 mongoose.model("Canvas", Canvas);
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/DAM', { useNewUrlParser: true });
+const uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/DAM'
+mongoose.connect(uristring, { useNewUrlParser: true });
