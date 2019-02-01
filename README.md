@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/AbirHassan/DAM/blob/master/public/img/dam_logo.png" width=200></p>
 
 ## about
-DAM, or Design-A-Map, is a software design to help with urban planning and creating maps, that can be used in games and other creative mediums. Users can drag and drop assets on a canvas with ease and see in realtime what impact the dragged assets have on metrics such as traffic, safety and noise.
+DAM, or Design-A-Map, is a software designed to help with urban planning and creating maps, that can be used in games and other creative mediums. Users can drag and drop assets on a canvas with ease and see in realtime what impact the dragged assets have on metrics such as traffic, safety and noise.
 
 ## [try it out!](https://design-a-map.herokuapp.com)
 
